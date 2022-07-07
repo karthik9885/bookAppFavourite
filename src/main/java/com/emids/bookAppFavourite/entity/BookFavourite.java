@@ -16,6 +16,17 @@ public class BookFavourite  {
 	private String bookCategory;
 	private int bookPrice;
 	private String bookLanguage;
+	private String bookImage;
+	public BookFavourite(String bookImage) {
+		super();
+		this.bookImage = bookImage;
+	}
+	public String getBookImage() {
+		return bookImage;
+	}
+	public void setBookImage(String bookImage) {
+		this.bookImage = bookImage;
+	}
 	private String username;
 	public int getBookId() {
 		return bookId;

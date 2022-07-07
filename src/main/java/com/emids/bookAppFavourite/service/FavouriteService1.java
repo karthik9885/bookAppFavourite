@@ -18,17 +18,23 @@ public class FavouriteService1 {
     FavouriteRepository favrepo;
 	public String deleteById;
 	
-	public BookFavourite savefavourite(BookFavourite f) throws BookAlreadyExistsException
+	public String savefavourite(BookFavourite f) throws BookAlreadyExistsException
 	{
-
-   		
-		
+      try {
 		if(favrepo.existsById(f.getBookId()))
 		{
 			throw new BookAlreadyExistsException();
+			
 		}
+		else {
 		BookFavourite savedfavourites=favrepo.save(f);
-		return savedfavourites;
+		return "Added succesfully";}
+      }
+      catch(BookAlreadyExistsException e)
+      {
+    	  e.printStackTrace();
+      }
+      return "Already exists";
 	}
 
      public List<BookFavourite> getAllFavouriteBooks()
@@ -42,10 +48,10 @@ public class FavouriteService1 {
     	 return favrepo.findById(bookId).get();
      }
      
-     public BookFavourite findBookByUsername(String username)
+     public List<BookFavourite> findBookBybookTitle(String bookTitle)
      {
-    	 BookFavourite favourites=favrepo.findByUsername(username);
-    			 return favourites;
+    	 List<BookFavourite> searchlist=findBookBybookTitle(bookTitle);
+    	 return searchlist;
      }
      
 	public String deleteFromFavourite(int bookId) throws BookNotFoundException

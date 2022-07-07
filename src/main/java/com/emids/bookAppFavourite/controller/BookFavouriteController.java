@@ -17,7 +17,7 @@ import com.emids.bookAppFavourite.exception.BookNotFoundException;
 import com.emids.bookAppFavourite.service.FavouriteService1;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-@CrossOrigin(origins = "http://localhost:3000/Register?")
+@CrossOrigin(origins = "*")
 @RestController
 //@EnableSwagger2
 public class BookFavouriteController {
@@ -33,10 +33,9 @@ public class BookFavouriteController {
    
     
     @PostMapping("/bookApp")
- 	public BookFavourite savefavourite( @RequestBody BookFavourite f)  throws BookAlreadyExistsException
+ 	public String savefavourite( @RequestBody BookFavourite f)  throws BookAlreadyExistsException
  	{
-    	BookFavourite savedbook=fs.savefavourite(f);
-		return savedbook;
+		return fs.savefavourite(f);
  	}
     
     @GetMapping("/bookApp")
@@ -51,12 +50,10 @@ public class BookFavouriteController {
     	return fs.findBookById(bookId);
     }
     
-    @GetMapping("/bookApp/get/{username}")
-    public BookFavourite findBookByUsername(@PathVariable String username)
+    @GetMapping("/bookApp/get/{bookTitle}")
+    public List<BookFavourite> findBookBybookTitle(@PathVariable String bookTitle)
     {
-    	BookFavourite favourites=fs.findBookByUsername(username);
-    	return favourites;
-    	
+    	return fs.findBookBybookTitle(bookTitle);
     }
     
 	@DeleteMapping("/bookApp/delete/{bookId}") 
